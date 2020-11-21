@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/lottery
+    username: root
+    password: arthur
+    driver-class-name: com.mysql.jdbc.Driver 
+  jpa:
+    hibernate:
+      ddl-auto: update 
+    show-sql: true
+
+lottery:
+    image.basedir: C:\\tmp\\lottery-image	
+    site.address: localhost:8080
+agent.qrcode.basedir: C:\\tmp\\agent-qr
