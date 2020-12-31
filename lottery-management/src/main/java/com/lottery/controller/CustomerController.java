@@ -6,11 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lottery.Const;
 import com.lottery.exception.InvalidParameter;
 import com.lottery.model.Customer;
 import com.lottery.model.CustomerBid;
@@ -45,35 +41,7 @@ public class CustomerController {
 	@Autowired
 	private LotteryItemOptionService lotteryItemOptionService;
 
-	@PostMapping(value = "/customers/sessions")
-	public Customer postSession(@RequestBody Customer customer, HttpSession session) throws InvalidParameter {
-		if (StringUtils.isEmpty(customer.getTel())) {
-			throw new InvalidParameter();
-		}
-		if (StringUtils.isEmpty(customer.getPlainPassword())) {
-			throw new InvalidParameter();
-		}
-		Customer result =  customerService.validatePassword(customer.getTel(), customer.getPlainPassword()).orElseThrow(InvalidParameter::new);
-		session.setAttribute(Const.CUSTOMER_ID_KEY_IN_SESSION, result.getId());
-		return result;
-	}
-
-	@PostMapping(value = "/customers")
-	public Customer postAgent(@RequestBody Customer customer) throws InvalidParameter {
-		if (StringUtils.isEmpty(customer.getTel())) {
-			throw new InvalidParameter();
-		}
-		if (StringUtils.isEmpty(customer.getPlainPassword())) {
-			throw new InvalidParameter();
-		}
-		if (StringUtils.isEmpty(customer.getAgent())) {
-			throw new InvalidParameter();
-		}
-		if (StringUtils.isEmpty(customer.getAgent().getId())) {
-			throw new InvalidParameter();
-		}
-		return customerService.saveOrUpdate(customer);
-	}
+	
 	
 	@GetMapping(value = "/customers/{id}")
 	public Customer getCustomer(@PathVariable Long id) {

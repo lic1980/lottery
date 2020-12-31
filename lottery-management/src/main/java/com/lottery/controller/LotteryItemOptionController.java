@@ -20,7 +20,12 @@ public class LotteryItemOptionController {
 	
 	
 	@GetMapping(value = "/lotteries/{id}/options")
-	public List<LotteryItemOption> getLottery(@PathVariable Long id) {
+	public List<LotteryItemOption> getLotteryOptionsByLottory(@PathVariable Long id) {
 		return lotteryItemOptionService.findByLotteryId(id);
+	}
+	
+	@GetMapping(value = "/lotteries/{lid}/items/{iid}/options")
+	public List<LotteryItemOption> getLotteryOptionsByLottoryItem(@PathVariable Long iid) {
+		return lotteryItemOptionService.findByLotteryItemId(iid);
 	}
 }

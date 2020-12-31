@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.zxing.WriterException;
-import com.lottery.Const;
-import com.lottery.exception.InternalServiceException;
 import com.lottery.exception.InvalidParameter;
 import com.lottery.model.Agent;
 import com.lottery.model.AgentCustomerDepositRecord;
@@ -50,32 +44,6 @@ public class AgentController {
 	private CustomerBidService customerBidService;
 	@Autowired
 	private CustomerDepositRecordService customerDepositRecordService;
-
-	@PostMapping(value = "/agents/sessions")
-	public Agent postSession(@RequestBody Agent agent, HttpSession session) throws InvalidParameter {
-		if (StringUtils.isEmpty(agent.getTel())) {
-			throw new InvalidParameter();
-		}
-		if (StringUtils.isEmpty(agent.getPlainPassword())) {
-			throw new InvalidParameter();
-		}
-		Agent result = agentService.validatePassword(agent.getTel(), agent.getPlainPassword())
-				.orElseThrow(InvalidParameter::new);
-		session.setAttribute(Const.AGENT_ID_KEY_IN_SESSION, result.getId());
-		return result;
-	}
-
-	@PostMapping(value = "/agents")
-	public Agent postAgent(@RequestBody Agent agent) throws InvalidParameter, InternalServiceException {
-		if (StringUtils.isEmpty(agent.getTel())) {
-			throw new InvalidParameter();
-		}
-		try {
-			return agentService.saveOrUpdate(agent);
-		} catch (IOException | WriterException e) {
-			throw new InternalServiceException();
-		}
-	}
 
 	@GetMapping(value = "/agents/{id}")
 	public Agent getAgent(@PathVariable Long id) {

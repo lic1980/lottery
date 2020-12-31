@@ -1,5 +1,5 @@
 package com.lottery.model;
 
-public enum SIteRole {
+public enum SiteRole {
 	ADMIN, AGENT, CUSTOMER
 }

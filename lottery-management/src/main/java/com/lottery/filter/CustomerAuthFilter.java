@@ -57,7 +57,7 @@ public class CustomerAuthFilter implements Filter {
 	private synchronized List<String> getExcludeUri() {
 		if (excludeUris == null) {
 			excludeUris = new ArrayList<>();
-			excludeUris.add("/customers/sessions");
+			//excludeUris.add("/customers/sessions");
 		}
 		return excludeUris;
 	}

@@ -57,7 +57,7 @@ public class AgentAuthFilter implements Filter {
 	private synchronized List<String> getExcludeUri() {
 		if (excludeUris == null) {
 			excludeUris = new ArrayList<>();
-			excludeUris.add("/agents/sessions");
+			//excludeUris.add("/agents/sessions");
 		}
 		return excludeUris;
 	}

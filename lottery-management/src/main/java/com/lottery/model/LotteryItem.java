@@ -23,10 +23,10 @@ public class LotteryItem {
 	private String name;
 	@Column
 	private int minOptionNum;
-	@Column
+	@Column(name="`order`")
 	private int order;
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="lottery_item_id")
 	private List<LotteryItemOption> options;
 	@ManyToOne

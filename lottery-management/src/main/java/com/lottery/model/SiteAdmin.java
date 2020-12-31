@@ -8,8 +8,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "agent_agent")
-public class Admin {
+@Table(name = "site_admin")
+public class SiteAdmin {
 	@Id
 	@Column(updatable = false)
 	private Long id;

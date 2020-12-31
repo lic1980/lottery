@@ -15,7 +15,7 @@ public class LotteryItemOption {
 	private Long id;
 	@Column
 	private String text;
-	@Column
+	@Column(name="`order`")
 	private int order;
 	@ManyToOne
     @JoinColumn(name="lottery_item_id")

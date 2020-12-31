@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -27,6 +28,11 @@ public class CustomerService {
 			customer.setPassword(SecurityUtils.encryptPassword(customer.getPlainPassword()));
 		}
 		return repo.save(customer);
+	}
+	
+	public Page<Customer> findAll(int pageNum, int pageSize) {
+		Pageable page = PageRequest.of(pageNum, pageSize);
+		return repo.findAll(page);
 	}
 	
 	public Optional<Customer> findById(Long id) {

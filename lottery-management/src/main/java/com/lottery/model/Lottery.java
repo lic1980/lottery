@@ -25,11 +25,11 @@ public class Lottery {
 	@Column
 	private int baseFee;
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="lottery_id")
 	private List<LotteryItem> items;
 	@JsonIgnore
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="lottery_id")
 	private List<LotteryRound> rounds;
 	
