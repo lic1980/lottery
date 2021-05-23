@@ -88,9 +88,6 @@ export default {
                     optionSelectedNumByItemId.set(itemId, 1 );
                 }
             }
-
-            console.log("###1 " + optionSelectedNumByItemId.size)
-            console.log("###2 " + JSON.stringify(this.lotteryRound.lottery))
             // count fee
             if (optionSelectedNumByItemId.size >= this.lotteryRound.lottery.minItemNum)  {
                 let baseFee = this.lotteryRound.lottery.baseFee;
